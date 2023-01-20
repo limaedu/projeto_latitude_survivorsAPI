@@ -58,7 +58,7 @@ async def mark_as_infected(id_survivor: int, db: Session = Depends(get_db)) -> S
 
 
 @router.post("", response_model= List[SurvivorResponse], status_code= 201)
-async def create_survivor(survivor_request: List[SurvivorRequest], db: Session = Depends(get_db)) -> List[SurvivorResponse]:
+async def create_survivors(survivor_request: List[SurvivorRequest], db: Session = Depends(get_db)) -> List[SurvivorResponse]:
 
     survivors_created = []
 

@@ -101,7 +101,7 @@ def test_update_survivor():
     assert response.json() == {**data,"id": 1, "name": "bar", "infected": False,}
 
 
-def test_create_survivor():
+def test_create_survivors():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 

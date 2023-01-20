@@ -11,7 +11,7 @@ SurvivosAPI is an API that helps you locate other survivors.
 You will be able to:
 
 * **Get all survivors** 
-* **Create a survivor** 
+* **Create survivors** 
 * **Get a survivor by id** 
 * **Update a survivor** 
 * **Report a survivor as infected** 
