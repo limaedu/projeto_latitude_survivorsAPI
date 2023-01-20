@@ -1,31 +1,12 @@
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from database import get_db
-from survivors.models.survivors_model import Survivor
+from survivors.models.survivors_model import Survivor, SurvivorRequest, SurvivorResponse
 from haversine import haversine
 from typing import List, Optional
 from exceptions import IdNotFound
 
 router = APIRouter(prefix="/survivors")
-
-class SurvivorResponse(BaseModel):
-    id: int
-    name: str
-    gender: str
-    latitude: float
-    longitude: float
-    infected: bool
-
-    class Config:
-        orm_mode = True
-
-
-class SurvivorRequest(BaseModel):
-    name: str
-    gender: str
-    latitude: float
-    longitude: float
 
 
 @router.get("", response_model=List[SurvivorResponse] )

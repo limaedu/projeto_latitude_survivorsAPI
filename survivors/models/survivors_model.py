@@ -1,5 +1,6 @@
 from database import Base
 from sqlalchemy import Boolean, Column, Integer, String, Float
+from pydantic import BaseModel
 
 class Survivor(Base):
     __tablename__ = 'survivors'
@@ -13,4 +14,20 @@ class Survivor(Base):
     reported_infected = Column(Integer, default=0)
 
 
+class SurvivorResponse(BaseModel):
+    id: int
+    name: str
+    gender: str
+    latitude: float
+    longitude: float
+    infected: bool
 
+    class Config:
+        orm_mode = True
+
+
+class SurvivorRequest(BaseModel):
+    name: str
+    gender: str
+    latitude: float
+    longitude: float
