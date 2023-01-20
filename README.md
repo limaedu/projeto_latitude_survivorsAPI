@@ -69,7 +69,7 @@ $ pytest -v
 ```
 ---
 
-### **2.  <u>Future improvements</u>**
+### **3.  <u>Future improvements</u>**
 <p></p>
 
 - Implementing authentication, such as Bearer with JWT Tokens
