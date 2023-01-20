@@ -31,7 +31,7 @@ app = FastAPI(title="SurvivorsAPI",
 
 @app.get("/", include_in_schema=False)
 async def root():
-    return RedirectResponse(url = '/survivors')
+    return RedirectResponse(url = '/docs')
     
 app.include_router(survivors_routers.router)
 app.add_exception_handler(IdNotFound, id_not_found_exception_handler)
