@@ -4,8 +4,7 @@ from database import get_db
 from survivors.models.survivors_model import Survivor, SurvivorRequest, SurvivorResponse
 from haversine import haversine
 from typing import List, Optional
-from exceptions import IdNotFound
-
+from exceptions import IdNotFound, CoordinatesOutOfRange
 router = APIRouter(prefix="/survivors")
 
 
@@ -30,10 +29,15 @@ async def get_closest_survivor(id_survivor: int, db: Session = Depends(get_db)) 
     lat_reference = survivor_request.latitude
     long_reference = survivor_request.longitude
     all_survivors = db.query(Survivor).all()
-    distances = get_distances_from_survivor(id_survivor, all_survivors, lat_reference, long_reference)
+
+    try:
+        distances = get_distances_from_survivor(id_survivor, all_survivors, lat_reference, long_reference)
+    except ValueError:
+        raise CoordinatesOutOfRange()
+
 
     closest_survivor = db.query(Survivor).get(min(distances, key=distances.get))
-
+    
     return closest_survivor
 
 
@@ -53,16 +57,20 @@ async def mark_as_infected(id_survivor: int, db: Session = Depends(get_db)) -> S
     return survivor_to_mark
 
 
-@router.post("", response_model= SurvivorResponse, status_code= 201)
-async def create_survivor(survivor_request: SurvivorRequest, db: Session = Depends(get_db)) -> SurvivorResponse:
+@router.post("", response_model= List[SurvivorResponse], status_code= 201)
+async def create_survivor(survivor_request: List[SurvivorRequest], db: Session = Depends(get_db)) -> List[SurvivorResponse]:
 
-    survivor_to_create = Survivor(**survivor_request.dict()) 
+    survivors_created = []
 
-    db.add(survivor_to_create)
-    db.commit()
-    db.refresh(survivor_to_create)
+    for survivor in survivor_request:
+        survivor_to_create = Survivor(**survivor.dict()) 
+        db.add(survivor_to_create)
+        db.commit()
+        db.refresh(survivor_to_create)
+        survivors_created.append(survivor_to_create)
 
-    return survivor_to_create
+    
+    return survivors_created
 
 
 @router.put("/{id_survivor}", response_model= SurvivorResponse, status_code= 200)
