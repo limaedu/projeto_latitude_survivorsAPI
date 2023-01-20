@@ -6,7 +6,7 @@ developed by: [Eduardo Lima](https://www.linkedin.com/in/eduardo-lima-araujo/)
 </h2>
 
 ---
-This is an API developed with [FastAPI](https://fastapi.tiangolo.com), a Python framework for building API's. The purpose of this application is to store survivors from a zombie apocalypse and allow them to find the closest survivor from their location.
+This is an API developed with [FastAPI](https://fastapi.tiangolo.com), a Python framework for building API's. The purpose of this application itself is to store survivors from a zombie apocalypse and allow them to find the closest survivor from their location.
 <br/><br/>
 All the survivors are stored in a <b>PostgreSQL database</b> hosted on [Supabase](https://supabase.com) and the application is hosted on [Deta](https://www.deta.sh).
 <br/><br/>
@@ -21,7 +21,7 @@ In order to run the application locally for debugging or running the tests, foll
 
 ### **1. <u>Deploy locally**</u>
 
-<br>
+<p></p>
 
 #### **1.1 Cloning the repository**
 ```cmd
@@ -67,6 +67,11 @@ In order to test the **database** without affecting the PostgreSQL in production
 ```cmd
 $ pytest -v
 ```
+---
 
+### **2.  <u>Future improvements</u>**
+<p></p>
 
-
+- Implementing authentication, such as Bearer with JWT Tokens
+- Develop more unit and integration tests
+- Deploying the tests to a CI/CD plataform such as Jenkins or GitHub Actions
