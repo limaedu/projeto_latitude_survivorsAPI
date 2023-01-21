@@ -34,6 +34,7 @@ $ pip install virtualenv
 ```cmd
 $ virtualenv -p python3 <env_name> #create environment
 $ .\<env_name>\scripts\activate #activating
+$ cd projeto_latitude_survivorsAPI #moving to project folder
 ```
 
 #### **1.3 Installing dependecies**
