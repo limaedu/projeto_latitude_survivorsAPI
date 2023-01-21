@@ -110,4 +110,12 @@ def test_create_survivors():
     assert response.status_code == 201
     assert response.json() == [{**data, "id": 1, "infected": False}]
 
-    
+
+def test_get_non_existent_id():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+    response = client.get("/survivors/20000")
+
+    assert response.status_code == 404
+    assert response.json()["message"] == "Survivor Id '20000' not found"
