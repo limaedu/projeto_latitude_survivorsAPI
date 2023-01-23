@@ -1,0 +1,11 @@
+services:
+  core_api:
+    build: .
+    image: user/fastapi_survivors:latest
+    container_name: "fastapi_survivors"
+    ports:
+      - "8000:15400"
+    volumes:
+      - /usr/src/app
+    
+
